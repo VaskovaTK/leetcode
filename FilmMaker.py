@@ -9,7 +9,7 @@ class Film():
     def getTime(self):
         return time.time()
 
-    def filmCode(self, fileInPath, fileOutPath, chunksize=64):
+    def filmCode(self, fileInPath, fileOutPath, chunksize=16):
         counter = 0
         p1 = 0
         fileIn = open(fileInPath, "rb")
@@ -39,7 +39,7 @@ class Film():
 
 
 
-    def filmDecode(self, fileInPath, fileOutPath, chunksize=64):
+    def filmDecode(self, fileInPath, fileOutPath, chunksize=16):
         fileInSize = os.path.getsize(fileInPath)
         remainder = fileInSize%chunksize
         counter = 0
@@ -86,9 +86,9 @@ class Film():
 logger.info('start')
 
 fi = Film()
-fileInPath = 'C:/Users/tanya/Downloads/A Sound of Thunder.avi'
-print(fi.filmCode(fileInPath, fileInPath + '.new.avi', 16))
-print(fi.filmDecode(fileInPath + '.new.avi', fileInPath + '.changed.avi', 16))
+fileInPath = 'C:/Users/tanya/Downloads/Tenet (HD).m4v'
+print(fi.filmCode(fileInPath, fileInPath + '.new.m4v', 16))
+# print(fi.filmDecode(fileInPath + '.new.avi', fileInPath + '.changed.avi', 16))
 
 # fileInPath = 'C:/Users/tanya/Downloads/a.txt'
 # fi.filmCode(fileInPath, fileInPath + '.new.txt')
