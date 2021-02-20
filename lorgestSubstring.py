@@ -5,18 +5,21 @@ class Solution:
     def recursion (self, subStr: str, k: int, startIndex: int, finishIndex: int):
         if len(subStr)<k:
             return 0
-        letters = {}
+        letters = [0]*27
         for i in range (startIndex, finishIndex):
-            if subStr[i] not in letters:
-                letters[subStr[i]] = 1
+            numberFromLetter = (ord(subStr[i])-96)
+            if letters[numberFromLetter] ==0:
+                letters[numberFromLetter] = 1
             else:
-                letters[subStr[i]]+=1
+                letters[numberFromLetter]+=1
         maxLen = 0
         for index in range(startIndex, finishIndex):
-            if letters[subStr[index]] < k:
+            numberFromLetter = (ord(subStr[index])-96)
+            if letters[numberFromLetter] < k:
                 newStartIndex = finishIndex
                 for secondStartIndex in range(index+1, finishIndex):
-                    if letters[subStr[secondStartIndex]]>=k:
+                    numberForStartIndex = (ord(subStr[secondStartIndex])-96)
+                    if letters[numberForStartIndex]>=k:
                         newStartIndex = secondStartIndex
                         break
                 len1 = self.recursion(subStr,k, startIndex, index)
@@ -27,10 +30,10 @@ class Solution:
 
 
 sol = Solution()
-# print(sol.longestSubstring(s = "ababbc", k = 2)) #5
-# print(sol.longestSubstring("aaabbb",3)) #6
-# print(sol.longestSubstring('aaabb', 3)) #3
-# print(sol.longestSubstring('aabbbpqrst', 3)) #3
-# print(sol.longestSubstring("ababacb",3)) # 0
-# print(sol.longestSubstring("aaaaaaaaaaaabcdefghijklmnopqrstuvwzyz",3))
+print(sol.longestSubstring(s = "ababbc", k = 2)) #5
+print(sol.longestSubstring("aaabbb",3)) #6
+print(sol.longestSubstring('aaabb', 3)) #3
+print(sol.longestSubstring('aabbbpqrst', 3)) #3
+print(sol.longestSubstring("ababacb",3)) # 0
+print(sol.longestSubstring("aaaaaaaaaaaabcdefghijklmnopqrstuvwzyz",3))
 print(sol.longestSubstring("bbaaacbd",3)) #3
