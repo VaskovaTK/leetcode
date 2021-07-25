@@ -1,0 +1,88 @@
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        firstHead = headA
+        secondHead = headB
+        valDict = {}
+        head1 = firstHead
+        head2 = secondHead
+        flag1= False
+        flag2= False
+        while True:
+            if head1 and flag1 ==False:
+                if head1 not in valDict.keys():
+                    valDict[head1] = 1
+                else:
+                    return head1
+            else:
+                flag1 = True
+                if flag1 == True and flag2 == True:
+                    return ListNode(None)
+            if head1.next:
+                head1 = head1.next
+            else:
+                flag1 = True
+                if flag1 == True and flag2 == True:
+                    return ListNode(None)
+            if head2 and flag2 == False:
+                if head2 not in valDict.keys():
+                    valDict[head2] = 1
+                else:
+                    return head2
+            else:
+                flag2 = True
+                if flag1 == True and flag2 == True:
+                    return ListNode(None)
+            if head2.next:
+                head2 = head2.next
+            else:
+                flag2 = True
+                if flag1 == True and flag2 == True:
+                    return ListNode(None)
+            if flag1 == True and flag2 == True:
+                return ListNode (None)
+        # head = firstHead
+        # if head.val not in valDict.keys():
+        #     valDict[head.val] = 1
+        # else:
+        #     return head
+        # while head.next:
+        #     if head.next not in valDict.keys():
+        #         valDict[head.next.val] = 1
+        #     head = head.next
+        # head = secondHead
+        # if head.val not in valDict.keys():
+        #     valDict[head.val] = 1
+        # else:
+        #     return head
+        # while head.next:
+        #     if head.next not in valDict.keys():
+        #         valDict[head.next.val] = 1
+        #     else:
+        #         return head.next
+        #     head = head.next
+        # return ListNode(None)
+
+
+def example2(array:list):
+    root = ListNode(array[0])
+    curr = root
+    for i in range (1, len(array)):
+        curr.next = ListNode(array[i])
+        curr = curr.next
+    return root
+def example3(node:int):
+    return ListNode(node)
+
+sol = Solution()
+# print(sol.getIntersectionNode(example(1,2,3,4), example(6,3,4,5)))
+# print(sol.getIntersectionNode(example2([4,1,8,4,5]), example2([5,6,1,8,4,5])).val)
+# print(sol.getIntersectionNode(example2([2,6,4]), example2([1,5])).val)
+print(sol.getIntersectionNode(example3(0), example2([2,6,4])).val)
+
+
