@@ -5,47 +5,67 @@ class ListNode:
         self.next = None
 
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        firstHead = headA
-        secondHead = headB
-        valDict = {}
-        head1 = firstHead
-        head2 = secondHead
-        flag1= False
-        flag2= False
-        while True:
-            if head1 and flag1 ==False:
-                if head1 not in valDict.keys():
-                    valDict[head1] = 1
-                else:
-                    return head1
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode):
+        n1 = headA
+        n2 = headB
+        flag = 0
+        while (flag != 2):
+            if n1 == None:
+                flag += 1
+                n1 = headB
             else:
-                flag1 = True
-                if flag1 == True and flag2 == True:
-                    return ListNode(None)
-            if head1.next:
-                head1 = head1.next
+                n1 = n1.next
+            if n2 == None:
+                flag += 1
+                n2 = headA
             else:
-                flag1 = True
-                if flag1 == True and flag2 == True:
-                    return ListNode(None)
-            if head2 and flag2 == False:
-                if head2 not in valDict.keys():
-                    valDict[head2] = 1
-                else:
-                    return head2
-            else:
-                flag2 = True
-                if flag1 == True and flag2 == True:
-                    return ListNode(None)
-            if head2.next:
-                head2 = head2.next
-            else:
-                flag2 = True
-                if flag1 == True and flag2 == True:
-                    return ListNode(None)
-            if flag1 == True and flag2 == True:
-                return ListNode (None)
+                n2 = n2.next
+        while (n1 != None and n2 != None):
+            if n1 == n2:
+                return n1
+            n1 = n1.next
+            n2 = n2.next
+        return None
+        # firstHead = headA
+        # secondHead = headB
+        # valDict = {}
+        # head1 = firstHead
+        # head2 = secondHead
+        # flag1= False
+        # flag2= False
+        # while True:
+        #     if head1 and flag1 ==False:
+        #         if head1 not in valDict.keys():
+        #             valDict[head1] = 1
+        #         else:
+        #             return head1
+        #     else:
+        #         flag1 = True
+        #         if flag1 == True and flag2 == True:
+        #             return ListNode(None)
+        #     if head1.next:
+        #         head1 = head1.next
+        #     else:
+        #         flag1 = True
+        #         if flag1 == True and flag2 == True:
+        #             return ListNode(None)
+        #     if head2 and flag2 == False:
+        #         if head2 not in valDict.keys():
+        #             valDict[head2] = 1
+        #         else:
+        #             return head2
+        #     else:
+        #         flag2 = True
+        #         if flag1 == True and flag2 == True:
+        #             return ListNode(None)
+        #     if head2.next:
+        #         head2 = head2.next
+        #     else:
+        #         flag2 = True
+        #         if flag1 == True and flag2 == True:
+        #             return ListNode(None)
+        #     if flag1 == True and flag2 == True:
+        #         return ListNode (None)
         # head = firstHead
         # if head.val not in valDict.keys():
         #     valDict[head.val] = 1
@@ -81,8 +101,8 @@ def example3(node:int):
 
 sol = Solution()
 # print(sol.getIntersectionNode(example(1,2,3,4), example(6,3,4,5)))
-# print(sol.getIntersectionNode(example2([4,1,8,4,5]), example2([5,6,1,8,4,5])).val)
-# print(sol.getIntersectionNode(example2([2,6,4]), example2([1,5])).val)
-print(sol.getIntersectionNode(example3(0), example2([2,6,4])).val)
+print(sol.getIntersectionNode(example2([4,1,8,4,5]), example2([5,6,1,8,4,5])))
+# print(sol.getIntersectionNode(example2([2,6,4]), example2([1,5])))
+# print(sol.getIntersectionNode(example3(0), example2([2,6,4])))
 
 
